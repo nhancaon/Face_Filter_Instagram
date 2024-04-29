@@ -5,13 +5,7 @@ import numpy
 import cv2
 import os
 
-
 def Bat_Filter(image, result):
-    '''
-    args
-    image: from webcam
-    result: [None]
-    '''
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     bat = Image.open('./Filter_image/bat.png')
@@ -59,13 +53,6 @@ def Bat_Filter(image, result):
 
 
 def SunGlass_filter(image, result):
-    '''
-    args
-    image: from webcam
-    result: [None]
-    '''
-    # Load the jpg file into a numpy array
-
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
 
@@ -116,12 +103,6 @@ def SunGlass_filter(image, result):
 
 
 def Cry_filter(image, result):
-    '''
-    args
-    image: from webcam
-    result: [None]
-    '''
-
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     face_loco = face_recognition.face_locations(image)
@@ -173,13 +154,7 @@ def Cry_filter(image, result):
 
 
 def Tear_filter(image, result):
-    '''
-    args
-    image: from webcam
-    result: [None]
-    '''
     # Load the jpg file into a numpy array
-
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     face_loco = face_recognition.face_locations(image)
@@ -232,12 +207,6 @@ def Tear_filter(image, result):
 
 
 def Sharingan_filter(image, result):
-    '''
-    args
-    image: from webcam
-    result: [None]
-    '''
-
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     face_loco = face_recognition.face_locations(image)
@@ -290,11 +259,6 @@ def Sharingan_filter(image, result):
 
 
 def SkiMask_filter(image, result):
-    '''
-     args
-     image: from webcam
-     result: [None]
-     '''
     # Load the jpg file into a numpy array
 
     # Find all facial features in all the faces in the image
@@ -350,7 +314,6 @@ def SkiMask_filter(image, result):
 
 
 def Clown(image, result):
-
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     face_loco = face_recognition.face_locations(image)

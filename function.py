@@ -15,8 +15,7 @@ def filter(height, size, frame_resize_scale, img, thread, test, prev_frame_time,
     imgOriginal = cv2.resize(imgOriginal, None, fx=1.0/frame_resize_scale,
                              fy=1.0/frame_resize_scale, interpolation=cv2.INTER_LINEAR)
     try:
-        thread[0] = threading.Thread(
-            target=getattr(Face_Filter_cam, filter_name), args=(imgOriginal, test))
+        thread[0] = threading.Thread(target = getattr(Face_Filter_cam, filter_name), args = (imgOriginal, test))
         thread[0].run()
         # if(thread[0] == None):
         #     thread[0]= threading.Thread(target=Face_Filter_cam.SunGlass_filter, args=(imgOriginal, test))
