@@ -21,12 +21,12 @@ y_position = (screen_height - window_height) // 2
 root.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 def filter_color():
-    command = [sys.executable, "checkLogin.py"]
+    command = [sys.executable, "main_color.py"]
     subprocess.Popen(command)
     root.destroy()
 
 def filter_face():
-    command = [sys.executable, "checkLogin.py"]
+    command = [sys.executable, "main_face.py"]
     subprocess.Popen(command)
     root.destroy()
 
