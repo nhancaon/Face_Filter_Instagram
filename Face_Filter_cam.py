@@ -14,8 +14,8 @@ def Bat_Filter(image, result):
     angle = math.atan2(right_eye[1] - left_eye[1], right_eye[0] - left_eye[0])
     bat_angle = -math.atan(angle) * 180 / math.pi
     bat_angle_rad = math.radians(bat_angle)
-    Angle_matrix = numpy.array([[math.cos(bat_angle_rad), -math.sin(bat_angle_rad)], [
-                               math.sin(bat_angle_rad), math.cos(bat_angle_rad)]])
+    Angle_matrix = numpy.array([[math.cos(bat_angle_rad), -math.sin(bat_angle_rad)], 
+                                [math.sin(bat_angle_rad), math.cos(bat_angle_rad)]])
     Vector1 = numpy.array([41 - bat.size[0]//2, bat.size[1]//2 - 307])
     Vector2 = numpy.array([178 - bat.size[0]//2, bat.size[1]//2 - 307])
     res1 = numpy.dot(Angle_matrix, Vector1)

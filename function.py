@@ -8,7 +8,6 @@ import threading
 import sys
 import time
 
-
 def filter(height, size, frame_resize_scale, img, thread, test, prev_frame_time, new_frame_time, filter_name):
     new_frame_time = time.time()
     imgOriginal = copy.deepcopy(img)
@@ -32,13 +31,13 @@ def filter(height, size, frame_resize_scale, img, thread, test, prev_frame_time,
     except:
         imfilter = imgOriginal
     imfilter = np.array(imfilter)
-    imfilter = cv2.resize(imfilter, None, fx=frame_resize_scale,
-                          fy=frame_resize_scale, interpolation=cv2.INTER_LINEAR)
+    imfilter = cv2.resize(imfilter, None, fx = frame_resize_scale, 
+                          fy = frame_resize_scale, interpolation = cv2.INTER_LINEAR)
 
-    fps = 1/(new_frame_time-prev_frame_time)
+    fps = 1 / (new_frame_time - prev_frame_time)
     prev_frame_time = new_frame_time
     # converting the fps into integer
     fps = int(fps)
     cv2.putText(imfilter, "{0:.2f}-framePerSecond".format(fps),
-                (50, size[0]-10), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
+                (50, size[0] - 10), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 255, 0), 1)
     return imfilter, prev_frame_time
