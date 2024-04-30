@@ -259,17 +259,14 @@ def Sharingan_filter(image, result):
 
 
 def SkiMask_filter(image, result):
-    # Load the jpg file into a numpy array
-
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     face_loco = face_recognition.face_locations(image)
 
-    bat = Image.open('./Filter_image/skimask2.png')
+    bat = Image.open('./Filter_image/skimask.png')
     left_eye = numpy.array(face_landmarks_list[0]['left_eye'][0])
     right_eye = numpy.array(face_landmarks_list[0]['right_eye'][0])
-    angle = math.atan2(right_eye[1] - left_eye[1],
-                       right_eye[0] - left_eye[0])
+    angle = math.atan2(right_eye[1] - left_eye[1], right_eye[0] - left_eye[0])
     bat_angle = -math.atan(angle) * 180 / math.pi
     bat_angle_rad = math.radians(bat_angle)
     Angle_matrix = numpy.array([[math.cos(bat_angle_rad), -math.sin(bat_angle_rad)], [
