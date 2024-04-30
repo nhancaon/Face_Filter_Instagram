@@ -4,7 +4,7 @@ import os
 import glob
 import numpy as np
 
-class SimpleFacerec:
+class SimpleFaceRecognition:
     def __init__(self):
         self.known_face_encodings = []
         self.known_face_names = []
@@ -15,7 +15,6 @@ class SimpleFacerec:
     def load_encoding_images(self, images_path):
         # Load Images
         images_path = glob.glob(os.path.join(images_path, "*.*"))
-
         print("{} encoding images found.".format(len(images_path)))
 
         # Store image encoding and names
@@ -47,11 +46,6 @@ class SimpleFacerec:
             # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
             name = "Unknown"
-
-            # # If a match was found in known_face_encodings, just use the first one.
-            # if True in matches:
-            #     first_match_index = matches.index(True)
-            #     name = known_face_names[first_match_index]
 
             # Or instead, use the known face with the smallest distance to the new face
             face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)

@@ -38,8 +38,8 @@ ava_label.pack(pady=10)
 
 
 # Create buttons
-login_button = ctk.CTkButton(root, text="Login", command=login)
-exit_button = ctk.CTkButton(root, text="Exit", command=exit_program)
+login_button = ctk.CTkButton(root, text="Login", font=("Arial", 13, "bold"), corner_radius=32, command=login)
+exit_button = ctk.CTkButton(root, text="Exit", font=("Arial", 13, "bold"), corner_radius=32, command=exit_program)
 
 # Place labels, entry fields, and buttons using grid layout
 login_button.pack(pady=20)

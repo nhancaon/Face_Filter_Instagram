@@ -1,5 +1,5 @@
 import pygame
-from simple_facerec import SimpleFacerec
+from simple_face_recognition import SimpleFaceRecognition
 from function import *
 from tkinter import *
 from tkinter import messagebox
@@ -17,7 +17,7 @@ class CheckLogin:
         master.title("Face Recognition for Login")
 
         self.cap = None
-        self.sfr = SimpleFacerec()
+        self.sfr = SimpleFaceRecognition()
         self.sfr.load_encoding_images("saved_face/")
 
         self.photo = None
@@ -29,7 +29,7 @@ class CheckLogin:
         self.canvas = ctk.CTkCanvas(self.image_frame, width=640, height=480)
         self.canvas.pack()
 
-        self.recognition_button = ctk.CTkButton(root, text="Recognition", corner_radius=32, fg_color="transparent", hover_color="#76520e", border_color="#FFCC70", border_width=2, command=self.capture_image)
+        self.recognition_button = ctk.CTkButton(root, text="Recognition", font=("Arial", 13, "bold"), corner_radius=32, command=self.capture_image) #, hover_color="#0E46A3", fg_color="transparent", border_color="#FFCC70", border_width=2
         self.recognition_button.pack(padx=4, pady=160)
 
         self.open_camera()
