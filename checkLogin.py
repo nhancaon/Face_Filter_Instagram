@@ -69,28 +69,33 @@ class CheckLogin:
 
     def recognition(self, save_img):
         face_locations, face_names = self.sfr.detect_known_faces(save_img)
-        for face_loc, name in zip(face_locations, face_names):
-            y1, x2, y2, x1 = face_loc[0], face_loc[1], face_loc[2], face_loc[3]
+        if face_locations.any():
+            for face_loc, name in zip(face_locations, face_names):
+                y1, x2, y2, x1 = face_loc[0], face_loc[1], face_loc[2], face_loc[3]
 
-            cv2.putText(save_img, name, (x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
-            cv2.rectangle(save_img, (x1, y1), (x2, y2), (0, 0, 200), 4)
+                cv2.putText(save_img, name, (x1, y1 - 10), cv2.FONT_HERSHEY_DUPLEX, 1, (0, 0, 200), 2)
+                cv2.rectangle(save_img, (x1, y1), (x2, y2), (0, 0, 200), 4)
 
-        save_img = cv2.cvtColor(save_img, cv2.COLOR_BGR2RGB)
-        reg_img = Image.fromarray(save_img)
-        self.photo2 = ImageTk.PhotoImage(image=reg_img)
+            save_img = cv2.cvtColor(save_img, cv2.COLOR_BGR2RGB)
+            reg_img = Image.fromarray(save_img)
+            self.photo2 = ImageTk.PhotoImage(image=reg_img)
 
-        # Delete previous image from canvas
-        self.canvas.delete("all")
+            # Delete previous image from canvas
+            self.canvas.delete("all")
 
-        # Display the photo on the canvas
-        self.canvas.create_image(0, 0, anchor="nw", image=self.photo2)
+            # Display the photo on the canvas
+            self.canvas.create_image(0, 0, anchor="nw", image=self.photo2)
 
-        # Check if any recognized name is "Unknown"
-        if "Unknown" in face_names:
-            messagebox.showerror("Error", "Failed to login!")
+            # Check if any recognized name is "Unknown"
+            if "Unknown" in face_names:
+                messagebox.showerror("Error", "Failed to login!")
+                self.master.after(1000, self.return_login)
+            else:
+                # Delay execution of login method by 5 seconds
+                self.master.after(2000, self.clear_canvas)
         else:
-            # Delay execution of login method by 5 seconds
-            self.master.after(2000, self.clear_canvas)
+            messagebox.showerror("Error", "No face detected!")
+            self.master.after(1000, self.return_login)
 
     def clear_canvas(self):
         self.canvas.delete("all")
@@ -131,6 +136,10 @@ class CheckLogin:
             self.canvas.delete("all")
             self.login()
 
+    def return_login(self):
+        command = [sys.executable, "login.py"]
+        subprocess.Popen(command)
+        self.master.destroy()
 
     def login(self):
         command = [sys.executable, "main.py"]
