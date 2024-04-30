@@ -134,15 +134,15 @@ class CheckLogin:
         else:
             # Clear canvas after countdown is finished
             self.canvas.delete("all")
-            self.login()
+            self.move_to_option()
 
     def return_login(self):
         command = [sys.executable, "login.py"]
         subprocess.Popen(command)
         self.master.destroy()
 
-    def login(self):
-        command = [sys.executable, "main.py"]
+    def move_to_option(self):
+        command = [sys.executable, "option.py"]
         subprocess.Popen(command)
         self.master.destroy()
 
