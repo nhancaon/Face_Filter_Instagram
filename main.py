@@ -20,7 +20,7 @@ class ImageDisplayApp:
         self.modified_image_data = None
         self.cap = None  # OpenCV VideoCapture object for webcam
         self.sfr = SimpleFacerec()
-        self.sfr.load_encoding_images("images/")
+        self.sfr.load_encoding_images("saved_face/")
 
         button_frame = CTkScrollableFrame(
             master=self.master, fg_color="#000000", border_color="#FFCC70", border_width=5, orientation="horizontal", scrollbar_button_color="#FFCC70", label_anchor="s", width=620, height=100)
