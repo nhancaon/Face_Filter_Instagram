@@ -21,7 +21,7 @@ y_position = (screen_height - window_height) // 2
 root.geometry(f"{window_width}x{window_height}+{x_position}+{y_position}")
 
 def login():
-    command = [sys.executable, "checkLogin.py"]
+    command = [sys.executable, "check_login.py"]
     subprocess.Popen(command)
     root.destroy()
 
