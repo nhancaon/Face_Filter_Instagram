@@ -1,10 +1,11 @@
-from tkinter import Tk, filedialog, messagebox
-from PIL import ImageTk, Image
+from tkinter import filedialog, messagebox 
+from PIL import ImageTk, Image, ImageGrab
 from function import *
 import cv2
 import customtkinter as ctk
 import subprocess
 import sys
+import io
 
 class Test:
     def __init__(self):
@@ -34,7 +35,7 @@ class Test:
         # Keep a reference to the PhotoImage object and the loaded image path
         self.photo = None
         self.photo2 = None
-        self.loaded_image_path = None
+        self.export_photo = None
 
         self.test = [None]
         self.thread = [None]
@@ -60,14 +61,18 @@ class Test:
         self.btn_capture_img = ctk.CTkButton(master=self.frame_button, text="Capture image", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), command=self.capture_image)
         self.btn_capture_img.grid(row=2, column=0, padx=20, pady=10)
 
-        self.btn_export = ctk.CTkButton(master=self.frame_button, text="Export image", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), command=self.close_app)
-        self.btn_export.grid(row=3, column=0, padx=20, pady=10)
+        self.btn_combobox = ctk.CTkComboBox(master=self.frame_button, values=[".png", ".jpg", ".jpeg", ".gif", ".bmp", ".pdf", ".webp"])
+        self.btn_combobox.grid(row=3, column=0, padx=20, pady=10)
+        self.btn_combobox.set("Select export type")
+
+        self.btn_export = ctk.CTkButton(master=self.frame_button, text="Export image", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), command=self.export_img)
+        self.btn_export.grid(row=4, column=0, padx=20, pady=10)
 
         self.btn_back = ctk.CTkButton(master=self.frame_button, text="Back to option", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), command=self.back_to_option)
-        self.btn_back.grid(row=4, column=0, padx=20, pady=10)
+        self.btn_back.grid(row=5, column=0, padx=20, pady=10)
 
         self.btn_exit_app = ctk.CTkButton(master=self.frame_button, text="Exit application", fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"), command=self.close_app)
-        self.btn_exit_app.grid(row=5, column=0, padx=20, pady=10)
+        self.btn_exit_app.grid(row=6, column=0, padx=20, pady=10)
 
         # Frame for display image
         # Frame on the top right
@@ -119,6 +124,7 @@ class Test:
     def show_webcam(self):
         if self.cap is not None:
             self.cam_success, self.frame = self.cap.read()
+            self.export_photo = self.frame
             option = self.optionmenu.get()  # Return selected filter
             option = self.convert_filter_name(option)
 
@@ -171,7 +177,27 @@ class Test:
         self.app.destroy()
 
     def export_img(self):
-        pass
+        if self.photo2 is not None:
+            export_type = self.btn_combobox.get()
+
+            # Image type
+            if export_type in [".png", ".jpg", ".jpeg", ".gif", ".bmp", ".webp", ".pdf"]:
+                # Select a file path
+                file_path = filedialog.asksaveasfilename(defaultextension=export_type, filetypes=[("Images", "*" + export_type)])
+                if file_path:
+                    file_path = file_path.replace("/", "\\")
+
+                    # Convert PIL.ImageTk.PhotoImage to PIL.Image.Image
+                    img = ImageTk.getimage(self.photo2)
+                    img = img.convert("RGB")
+                    img = img.save(file_path) # Save to file
+
+                    messagebox.showinfo("Success", f"Image saved successfully as {file_path}")
+            else:
+                messagebox.showerror("Error", "Invalid export type")
+        else:
+            messagebox.showerror("Error", "You have not captured any images")
+
 
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")
