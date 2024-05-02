@@ -5,9 +5,8 @@ import cv2
 import customtkinter as ctk
 import subprocess
 import sys
-import io
 
-class Test:
+class FaceFilter:
     def __init__(self):
         # Create the main UI
         self.app = ctk.CTk()
@@ -35,7 +34,6 @@ class Test:
         # Keep a reference to the PhotoImage object and the loaded image path
         self.photo = None
         self.photo2 = None
-        self.export_photo = None
 
         self.test = [None]
         self.thread = [None]
@@ -122,7 +120,6 @@ class Test:
     def show_webcam(self):
         if self.cap is not None:
             self.cam_success, self.frame = self.cap.read()
-            self.export_photo = self.frame
             option = self.optionmenu.get()  # Return selected filter
             option = self.convert_filter_name(option)
 
@@ -167,7 +164,7 @@ class Test:
             messagebox.showerror("Error", "You have not opened camera")
 
     def back_to_option(self):
-        command = [sys.executable, "option.py"]
+        command = [sys.executable, "main_option.py"]
         subprocess.Popen(command)
         self.app.destroy()
 
@@ -200,5 +197,5 @@ class Test:
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")
     ctk.set_default_color_theme("dark-blue")
-    app = Test()
+    app = FaceFilter()
     app.app.mainloop()
