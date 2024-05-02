@@ -142,7 +142,7 @@ class CheckLogin:
         self.master.destroy()
 
     def move_to_option(self):
-        command = [sys.executable, "option.py"]
+        command = [sys.executable, "main_option.py"]
         subprocess.Popen(command)
         self.master.destroy()
 
