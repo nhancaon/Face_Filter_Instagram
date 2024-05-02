@@ -1,7 +1,6 @@
 import cv2
 import numpy as np
 
-# region Spatial Domain
 def apply_filter(image, filter_type, kernel_size, sig=0):
     if filter_type == 'mean':
         return cv2.blur(image, (kernel_size, kernel_size))
@@ -67,56 +66,3 @@ def piecewise_linear(img, r1, s2):
 
     new_image = cv2.cvtColor(new_image, cv2.COLOR_BGR2RGB)
     return new_image
-# endregion
-
-# region Frequency Domain
-def GaussLowpass(img, D0):
-    F = np.fft.fft2(img)
-    F_shift = np.fft.fftshift(F)
-    M, N = img.shape  
-    H = np.zeros((M,N), dtype=np.float32)
-
-    for u in range(M):
-        for v in range(N):
-            D = np.sqrt((u-M/2)**2 + (v-N/2)**2)
-            H[u,v] = np.exp(-D**2/(2*D0*D0))
-
-    G_shift = F_shift * H
-    G = np.fft.ifftshift(G_shift)
-    g = np.abs(np.fft.ifft2(G))
-    return g
-
-def GaussHighpass(img, D0):
-    F = np.fft.fft2(img)
-    F_shift = np.fft.fftshift(F)
-
-    M, N = img.shape
-    H = np.zeros((M,N), dtype=np.float32)
-    for u in range(M):
-        for v in range(N):
-            D = np.sqrt((u-M/2)**2 + (v-N/2)**2)
-            H[u,v] = np.exp(-D**2/(2*D0*D0))
-    
-    HPF = 1 - H
-
-    G_shift = F_shift * HPF
-    G = np.fft.ifftshift(G_shift)
-    g = np.abs(np.fft.ifft2(G))
-    return g
-
-def GaussLowToHigh(img, D0):
-    image = GaussHighpass(GaussLowpass(img, D0), D0)
-    return image
-
-def GaussHighPassChange(img, D0):
-    pass_1_img = GaussHighpass(img, D0)
-    pass_10_img = GaussHighpass(img, D0)
-    pass_100_img = GaussHighpass(img, D0)
-    for _ in range(10):
-        pass_10_img = GaussHighpass(pass_10_img, D0)
-
-    for _ in range(100):
-        pass_100_img = GaussHighpass(pass_100_img, D0)
-
-    return [pass_1_img, pass_10_img, pass_100_img]
-# endregion
