@@ -51,7 +51,7 @@ class Test:
         self.frame_button = ctk.CTkFrame(master=self.app, corner_radius=0)
         self.frame_button.grid(row=0, column=0, rowspan=20, sticky="nsew")
 
-        self.optionmenu = ctk.CTkOptionMenu(master=self.frame_button, values=["Default", "Sun Glass", "Clown", "Cry", "Tear", "Batman", "Sharingan", "Thief", "Venom"])
+        self.optionmenu = ctk.CTkOptionMenu(master=self.frame_button, values=["Default", "Sun Glass", "Clown", "Cry", "Tear", "Batman", "Sharingan", "Thief"])
         self.optionmenu.grid(row=0, column=0, padx=20, pady=(20, 30))
         self.optionmenu.set("Select filter")
 
@@ -108,8 +108,6 @@ class Test:
         elif filter_name == "Sharingan":
             return "sharingan_filter"
         elif filter_name == "Thief":
-            return "skimask_filter"
-        elif filter_name == "Venom":
             return "skimask_filter"
 
     def open_camera(self):

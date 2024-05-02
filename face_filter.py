@@ -37,14 +37,6 @@ def bat_filter(image, result):
     LocoBat = [int(center_eye[0] - (bat.size[0]//2 + res3[0])),
                int(center_eye[1] - (bat.size[1]//2 - res3[1]))]
 
-    # DEBUGGING
-    # print(Vector3)
-    # print(res3)
-    # print(test)
-    # print(bat.size[0]//2, bat.size[1]//2)
-    # d = ImageDraw.Draw(bat, 'RGBA')
-    # d.point(center_eye, fill=(150, 0, 0))
-    # d.ellipse((test[0] - 5, test[1] - 5, test[0] + 5,test[1] + 5), fill='#f00')
     pil_image.paste(bat, LocoBat, bat)
     result[0] = pil_image
     return pil_image
@@ -87,14 +79,6 @@ def sunglass_filter(image, result):
     LocoBat = [int(center_eye[0] - (bat.size[0]//2 + res3[0])),
                int(center_eye[1] - (bat.size[1]//2 - res3[1]))]
 
-    # DEBUGGING
-    # print(Vector3)
-    # print(res3)
-    # print(test)
-    # print(bat.size[0]//2, bat.size[1]//2)
-    # d = ImageDraw.Draw(bat, 'RGBA')
-    # d.point(center_eye, fill=(150, 0, 0))
-    # d.ellipse((test[0] - 5, test[1] - 5, test[0] + 5,test[1] + 5), fill='#f00')
     pil_image.paste(bat, LocoBat, bat)
     result[0] = pil_image
     return
@@ -138,26 +122,17 @@ def cry_filter(image, result):
     LocoBat = [int(center_eye[0] - (bat.size[0]//2 + res3[0])),
                int(center_eye[1] - (bat.size[1]//2 - res3[1]))]
 
-    # DEBUGGING
-    # print(Vector3)
-    # print(res3)
-    # print(test)
-    # print(bat.size[0]//2, bat.size[1]//2)
-    # d = ImageDraw.Draw(bat, 'RGBA')
-    # d.point(center_eye, fill=(150, 0, 0))
-    # d.ellipse((test[0] - 5, test[1] - 5, test[0] + 5,test[1] + 5), fill='#f00')
     pil_image.paste(bat, LocoBat, bat)
     result[0] = pil_image
     return
 
 
 def tear_filter(image, result):
-    # Load the jpg file into a numpy array
     # Find all facial features in all the faces in the image
     face_landmarks_list = face_recognition.face_landmarks(image)
     face_loco = face_recognition.face_locations(image)
 
-    bat = Image.open('./Filter_image/cry2.png')
+    bat = Image.open('./Filter_image/tear.png')
     left_eye = numpy.array(face_landmarks_list[0]['left_eye'][0])
     right_eye = numpy.array(face_landmarks_list[0]['right_eye'][0])
     angle = math.atan2(right_eye[1] - left_eye[1], right_eye[0] - left_eye[0])
@@ -173,9 +148,7 @@ def tear_filter(image, result):
     pre_bat_size = bat.size
     bat = bat.rotate(bat_angle, expand=True)
     aft_bat_size = bat.size
-    bat_delta = (face_landmarks_list[0]['right_eye'][0][0] -
-                 face_landmarks_list[0]['left_eye'][0][0])/(res2[0] - res1[0])
-    print('angle: ', bat_angle)
+    bat_delta = (face_landmarks_list[0]['right_eye'][0][0] - face_landmarks_list[0]['left_eye'][0][0])/(res2[0] - res1[0])
     bat = bat.resize(
         (int(bat.size[0] * bat_delta), int(bat.size[1] * bat_delta)))
     center_eye = [face_landmarks_list[0]['left_eye'][0][0] + (face_landmarks_list[0]['left_eye'][3][0] - face_landmarks_list[0]['left_eye'][0][0])/2,
@@ -191,14 +164,6 @@ def tear_filter(image, result):
     LocoBat = [int(center_eye[0] - (bat.size[0]//2 + res3[0])),
                int(center_eye[1] - (bat.size[1]//2 - res3[1]))]
 
-    # DEBUGGING
-    # print(Vector3)
-    # print(res3)
-    # print(test)
-    # print(bat.size[0]//2, bat.size[1]//2)
-    # d = ImageDraw.Draw(bat, 'RGBA')
-    # d.point(center_eye, fill=(150, 0, 0))
-    # d.ellipse((test[0] - 5, test[1] - 5, test[0] + 5,test[1] + 5), fill='#f00')
     pil_image.paste(bat, LocoBat, bat)
     result[0] = pil_image
     return
@@ -227,7 +192,6 @@ def sharingan_filter(image, result):
     aft_bat_size = bat.size
     bat_delta = (face_landmarks_list[0]['right_eye'][0][0] -
                  face_landmarks_list[0]['left_eye'][0][0])/(res2[0] - res1[0])
-    print('angle: ', bat_angle)
     bat = bat.resize(
         (int(bat.size[0] * bat_delta), int(bat.size[1] * bat_delta)))
     center_eye = [face_landmarks_list[0]['left_eye'][0][0] + (face_landmarks_list[0]['left_eye'][3][0] - face_landmarks_list[0]['left_eye'][0][0])/2,
@@ -243,14 +207,6 @@ def sharingan_filter(image, result):
     LocoBat = [int(center_eye[0] - (bat.size[0]//2 + res3[0])),
                int(center_eye[1] - (bat.size[1]//2 - res3[1]))]
 
-    # DEBUGGING
-    # print(Vector3)
-    # print(res3)
-    # print(test)
-    # print(bat.size[0]//2, bat.size[1]//2)
-    # d = ImageDraw.Draw(bat, 'RGBA')
-    # d.point(center_eye, fill=(150, 0, 0))
-    # d.ellipse((test[0] - 5, test[1] - 5, test[0] + 5,test[1] + 5), fill='#f00')
     pil_image.paste(bat, LocoBat, bat)
     result[0] = pil_image
     return
@@ -277,9 +233,7 @@ def skimask_filter(image, result):
     pre_bat_size = bat.size
     bat = bat.rotate(bat_angle, expand=True)
     aft_bat_size = bat.size
-    bat_delta = (face_landmarks_list[0]['right_eye'][0][0] -
-                 face_landmarks_list[0]['left_eye'][0][0])/(res2[0] - res1[0])
-    print('angle: ', bat_angle)
+    bat_delta = (face_landmarks_list[0]['right_eye'][0][0] - face_landmarks_list[0]['left_eye'][0][0])/(res2[0] - res1[0])
     bat = bat.resize(
         (int(bat.size[0] * bat_delta), int(bat.size[1] * bat_delta)))
     center_eye = [face_landmarks_list[0]['left_eye'][0][0] + (face_landmarks_list[0]['left_eye'][3][0] - face_landmarks_list[0]['left_eye'][0][0])/2,
@@ -295,14 +249,6 @@ def skimask_filter(image, result):
     LocoBat = [int(center_eye[0] - (bat.size[0]//2 + res3[0])),
                int(center_eye[1] - (bat.size[1]//2 - res3[1]))]
 
-    # DEBUGGING
-    # print(Vector3)
-    # print(res3)
-    # print(test)
-    # print(bat.size[0]//2, bat.size[1]//2)
-    # d = ImageDraw.Draw(bat, 'RGBA')
-    # d.point(center_eye, fill=(150, 0, 0))
-    # d.ellipse((test[0] - 5, test[1] - 5, test[0] + 5,test[1] + 5), fill='#f00')
     pil_image.paste(bat, LocoBat, bat)
     result[0] = pil_image
     return
@@ -351,21 +297,14 @@ def clown_filter(image, result):
 
         # Gloss the lips
         toplip =face_landmarks['top_lip']
-        # toplip[0] = (toplip[0][0] - clown.size[0]//2, toplip[0][1])
-        # toplip[6] = (toplip[6][0] + clown.size[0]//2, toplip[6][1])
         d.polygon(toplip, fill=(210, 4, 45, 200))
         bottom_lip =face_landmarks['bottom_lip']
-        # bottom_lip[0] = (bottom_lip[0][0] + clown.size[0]//2, bottom_lip[0][1])
-        # bottom_lip[6] = (bottom_lip[6][0] - clown.size[0]//2, bottom_lip[6][1])
         d.polygon(bottom_lip, fill=(210, 4, 45, 200))
-        # d.line(face_landmarks['top_lip'], fill=(210, 4, 45, 200), width=8)
-        # d.line(face_landmarks['bottom_lip'], fill=(210, 4, 45, 200), width=8)
 
         # Sparkle the eyes
         d.polygon(face_landmarks['left_eye'], fill=(44,120,101, 30))
         d.polygon(face_landmarks['right_eye'], fill=(44,120,101, 30))
 
     pil_image.paste(clown, LocoClown, mask=clown)
-    # pil_image = cv2.cvtColor(pil_image, cv2.COLOR_BGR2RGB) 
     result[0] = pil_image
     return
