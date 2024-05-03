@@ -29,7 +29,7 @@ class CheckLogin:
         self.canvas = ctk.CTkCanvas(self.image_frame, width=640, height=480)
         self.canvas.pack()
 
-        self.recognition_button = ctk.CTkButton(root, text="Recognition", font=("Arial", 13, "bold"), corner_radius=32, command=self.capture_image) #, hover_color="#0E46A3", fg_color="transparent", border_color="#FFCC70", border_width=2
+        self.recognition_button = ctk.CTkButton(root, text="Recognition", font=("Arial", 13, "bold"), corner_radius=32, command=self.capture_image)
         self.recognition_button.pack(padx=4, pady=160)
 
         self.open_camera()
