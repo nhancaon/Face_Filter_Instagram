@@ -39,7 +39,6 @@ def Histogram(img, clip_limit):
 
 def Negative(img):
     img_neg = 256-1-img
-    img_neg = cv2.resize(img_neg, None, fx=0.7, fy=0.7)
     return img_neg
 
 def log_c(img_bgr, scale_value):
