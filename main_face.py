@@ -163,14 +163,6 @@ class FaceFilter:
         else:
             messagebox.showerror("Error", "You have not opened camera")
 
-    def back_to_option(self):
-        command = [sys.executable, "main_option.py"]
-        subprocess.Popen(command)
-        self.app.destroy()
-
-    def close_app(self):
-        self.app.destroy()
-
     def export_img(self):
         if self.photo2 is not None:
             export_type = self.btn_combobox.get()
@@ -193,6 +185,13 @@ class FaceFilter:
         else:
             messagebox.showerror("Error", "You have not captured any images")
 
+    def back_to_option(self):
+        command = [sys.executable, "main_option.py"]
+        subprocess.Popen(command)
+        self.app.destroy()
+
+    def close_app(self):
+        self.app.destroy()
 
 if __name__ == "__main__":
     ctk.set_appearance_mode("dark")
