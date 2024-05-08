@@ -43,6 +43,7 @@ class SimpleFaceRecognition:
 
         face_names = []
         for face_encoding in face_encodings:
+            
             # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(self.known_face_encodings, face_encoding)
             name = "Unknown"
@@ -50,7 +51,8 @@ class SimpleFaceRecognition:
             # Or instead, use the known face with the smallest distance to the new face
             face_distances = face_recognition.face_distance(self.known_face_encodings, face_encoding)
             best_match_index = np.argmin(face_distances)
-            if matches[best_match_index]:
+            closest_distance = face_distances[best_match_index]
+            if matches[best_match_index] and closest_distance < 0.38:
                 name = self.known_face_names[best_match_index]
             face_names.append(name)
 
